@@ -38,7 +38,7 @@ public class ReservationServiceImpl implements ReservationService {
         List<Spot> spotList = parkingLot.getSpotList();
         boolean check = false;
         for(Spot spot1 : spotList){
-            if(!spot1.isOccupied()) {
+            if(!spot1.getOccupied()) {
                 check = true;
                 break;
             }
@@ -53,21 +53,21 @@ public class ReservationServiceImpl implements ReservationService {
         check = false;
         for (Spot spot : spotList){
             if(requestSpotType.equals(SpotType.OTHERS) && spot.getSpotType().equals(SpotType.OTHERS)){
-                if (spot.getPricePerHour() * timeInHours < minPrice && !spot.isOccupied()){
+                if (spot.getPricePerHour() * timeInHours < minPrice && !spot.getOccupied()){
                     minPrice = spot.getPricePerHour() * timeInHours;
                     check = true;
                     spotChosen = spot;
                 }
             } else if (requestSpotType.equals(SpotType.FOUR_WHEELER) && spot.getSpotType().equals(SpotType.OTHERS) ||
                     spot.getSpotType().equals(SpotType.FOUR_WHEELER)) {
-                if(spot.getPricePerHour() * timeInHours < minPrice && !spot.isOccupied()){
+                if(spot.getPricePerHour() * timeInHours < minPrice && !spot.getOccupied()){
                     minPrice = spot.getPricePerHour() * timeInHours;
                     check = true;
                     spotChosen = spot;
                 }
             } else if (requestSpotType.equals(SpotType.TWO_WHEELER) && spot.getSpotType().equals(SpotType.OTHERS) ||
                     spot.getSpotType().equals(SpotType.FOUR_WHEELER) || spot.getSpotType().equals(SpotType.TWO_WHEELER)) {
-                if(spot.getPricePerHour() * timeInHours < minPrice && !spot.isOccupied()){
+                if(spot.getPricePerHour() * timeInHours < minPrice && !spot.getOccupied()){
                     minPrice = spot.getPricePerHour() * timeInHours;
                     check = true;
                     spotChosen = spot;
